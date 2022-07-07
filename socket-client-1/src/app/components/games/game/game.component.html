@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col">
+        <div *ngIf="game">
+            <div class="row">
+                <div class="col">
+                    <h1>Room {{ game.id }}</h1>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-auto">
+                    <button class="btn btn-primary" (click)="resetGame()">Reset Game <i class="fa-solid fa-arrow-rotate-right"></i></button>
+                </div>
+
+                <!-- display winner -->
+                <div class="offset-1 col" *ngIf="game.player1.choice && game.player2.choice">
+                    <h2>{{ displayWin() }} <i class="fa-solid fa-star" style="color: #ffe135"></i></h2>
+                </div>
+            </div>
+
+            <!-- player 1 -->
+            <div class="row mt-5 mb-3">
+                <h4>Player 1: {{ game.player1 && !game.player1.choice ? 'Selecting...' : '' }}</h4> 
+                <div class="col d-grid">
+                    <button [disabled]="game.player1.choice" class="py-3 btn btn-danger btn-lg btn-block" (click)="makeMove(1, 'rock')">
+                        <i class="fa-regular fa-hand-back-fist"></i> Rock 
+                    </button>
+                </div>
+                <div class="col d-grid">
+                    <button [disabled]="game.player1.choice" class="py-3 btn btn-warning btn-lg btn-block" (click)="makeMove(1, 'paper')">
+                        <i class="fa-regular fa-hand"></i> Paper 
+                    </button>
+                </div>
+                <div class="col d-grid">
+                    <button [disabled]="game.player1.choice" class="py-3 btn btn-success btn-lg btn-block" (click)="makeMove(1, 'scissors')">
+                        <i class="fa-regular fa-hand-scissors"></i> Scissors 
+                    </button>
+                </div>
+            </div>
+
+            <!-- choice display -->
+            <div class="card mt-5 p-4" style="min-height: 100px">
+                <div class="row card-body" *ngIf="game.player1.choice && game.player2.choice" >
+                    <div class="col">
+                        <h2>Player 1 chose {{ game.player1.choice }}</h2>
+                    </div>
+                    <div class="col">
+                        <h2>Player 2 chose {{ game.player2.choice }}</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- player 2 -->
+            <div class="row mt-5 mb-3">
+                <h4>Player 2: {{ game.player2 && !game.player2.choice ? 'Selecting...' : '' }}</h4> 
+                <div class="col d-grid">
+                    <button [disabled]="game.player2.choice" class="py-3 btn btn-danger btn-lg btn-block" (click)="makeMove(2, 'rock')">
+                        <i class="fa-regular fa-hand-back-fist"></i> Rock 
+                    </button>
+                </div>
+                <div class="col d-grid">
+                    <button [disabled]="game.player2.choice" class="py-3 btn btn-warning btn-lg btn-block" (click)="makeMove(2, 'paper')">
+                        <i class="fa-regular fa-hand"></i> Paper 
+                    </button>
+                </div>
+                <div class="col d-grid">
+                    <button [disabled]="game.player2.choice" class="py-3 btn btn-success btn-lg btn-block" (click)="makeMove(2, 'scissors')">
+                        <i class="fa-regular fa-hand-scissors"></i> Scissors 
+                    </button>
+                </div>
+            </div>
+
+
+            
+        </div>
+        <div *ngIf="!game">
+            No game selected
+        </div>
+    </div>
+</div>

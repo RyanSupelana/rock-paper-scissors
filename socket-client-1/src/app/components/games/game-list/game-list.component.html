@@ -1,0 +1,24 @@
+
+<div class='container-fluid my-4'>
+    <div class='row'>
+        <div class='col-4 col-md-3'>
+            <!-- game list -->
+            <div class='mb-3'>
+                <button class="btn btn-primary" (click)='newGame()'>New Game <i class="fa-solid fa-plus"></i></button>
+            </div>
+            <h1>List of Games</h1>
+            <div class="card btn-group-vertical p-2">
+                <div class="btn btn-secondary" [class.selected]='currentGame && game.id === currentGame.id' (click)='loadGame(game.id)' *ngFor='let game of games '>{{ game.id }}</div>
+                <div *ngIf="games && games.length === 0">No games found</div>
+            </div>
+        </div>
+        <div class='col'>
+            <!-- game board -->
+            <app-game
+                [game]="currentGame"
+                (makeMoveEmitter)="makeMove($event)"
+                (resetGameEmitter)="resetGame($event)"
+            ></app-game>
+        </div>
+     </div>
+</div>
