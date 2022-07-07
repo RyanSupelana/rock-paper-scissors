@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  client:
+    build: ./socket-client
+    container_name: client
+    ports:
+      - 4200:4200
+    volumes:
+      - ./socket-client/:/app
+    depends_on:
+      - server
+    links:
+      - server
+
+  server:
+    build: ./socket-server
+    container_name: server
+    ports:
+      - 3000:3000
+    volumes:
+      - ./socket-server/:/usr/src/app
+    command: "npm start"
